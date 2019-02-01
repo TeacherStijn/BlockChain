@@ -1,0 +1,70 @@
+REM 	Installeer Node.JS (download + 'volgende' + 'volgende')
+
+REM 	Maak package.json aan in rootdir server:
+npm init
+
+REM 	Installeer Express Light Node.js Webserver
+npm install express --save
+
+REM 	Installeer de Body-parser om met POST verzoeken om te kunnen gaan
+npm install body-parser --save
+
+REM	MAYBE voor betere werking met asynchrone calls in Node:
+npm install async --save
+
+REM	Zorg voor CORS! We moeten vanaf onze Angular server,
+REM	bij de Node.js Express server kunnen:
+npm install cors --save
+
+REM 	Stel de CORS correct in voor ALLE 3 de servers! Alle adressen + ip's noteren
+
+REM	Installeer Crypto-JS
+npm install crypto-js --save
+
+REM 	Stel in package.json ook het poortnummer goed in
+
+
+********* https://cloud.mongodb.com/user#/atlas/login
+
+REM 	Installeer MongoDb driver
+npm install mongodb --save
+
+REM 	Installeer Mongoose t.b.v. connectie en Model management
+npm install mongoose --save
+
+REM 	Installeer MongoDB in cloud, PER SERVER, gebruik opbouw:
+
+ALG Account:
+stijn.janssen@vijfhart.nl
+Wachtwoord12345!
+
+(user) blockchain_admin_test
+(pass) 12345
+
+	blockchain:
+	-> collection: blockchain
+	-> collection: transacties
+	-> collection: nodes
+
+REM	Installeer MongoDB Shell
+
+set PATH=%PATH%;C:\Program Files\MongoDB\Server\3.6\bin
+
+REM 	LET OP!@!@!@!@! Zorg voor geen Firewall oid! 
+
+mongo "mongodb+srv://cluster0-aoacb.mongodb.net/test" --username blockchain_admin_test --password 12345
+
+
+REM eventueel npm install node-fetch voor node get/post's of bluebird voor gebruik beter ondersteunde promises (ipv eigen Mongoose support
+voor promises)
+
+
+**************** ANGULAR 2+ ****************
+
+REM	In root VD server root dir! (dus 1 niveau hoger):
+ng new blockchain 
+
+REM	STEL PORTNR Goed in in 'blockservice.ts'!!
+
+REM 	NA klaarmaken BlockChain frontend in Angular:
+ng build

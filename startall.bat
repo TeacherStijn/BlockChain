@@ -1,0 +1,6 @@
+cd "Server1\server"
+start call "startup.bat"
+cd "..\..\Server2\server"
+start call "startup.bat"
+cd "..\..\Server3\server"
+start call "startup.bat"

@@ -1,0 +1,52 @@
+<main>
+  <h1>BlockChain App</h1>
+  <div id="nodes" class="form-group">
+    <h2>Node registreren:</h2>
+    <!-- Onderstaand nog een regexp mask toevoegen -->
+      <label for="node">IP adres / Hostname: </label>
+      <input [disabled]="!registratieAan" type="text" id="node" name="node" [(ngModel)]="node" class="form-control" placeholder="Ip adres of hostname"/>
+     <br/>
+    <button [disabled]="!registratieAan" (click)="clickRegistreerNode()" class="btn btn-success">Nieuwe node</button><br/><br/>
+    <h2>Geregistreerde nodes:</h2>
+    <ul>
+      <li *ngFor="let node of nodes$ | async">{{ node.node }}</li>
+    </ul>
+  </div>
+
+  <div id="transacties" class="form-group">
+    <h2>Transacties:</h2>
+    <ul>
+      <li *ngFor="let transactie of openTransacties$ | async">{{ transactie.zender }} naar: {{ transactie.ontvanger }} data: {{ transactie.amount }}</li>
+    </ul>
+      <button *ngIf="!voegToeBlok" (click)="voegToeBlok = !voegToeBlok" class="btn btn-success">Nieuwe transactie</button>
+      <div id="voegToe" *ngIf="voegToeBlok">
+        <label for="zender">Zender:</label><input type="text" id="zender" [(ngModel)]="zender" class="form-control" /><br/>
+        <label for="ontvanger">Ontvanger:</label><input type="text" id="ontvanger" [(ngModel)]="ontvanger" class="form-control" /><br/>
+        <label for="amount">Amount:</label><input type="text" id="amount" [(ngModel)]="amount" class="form-control"/><br/>
+        <button (click)="clickNewTransaction()"  class="btn btn-info">Voeg toe</button><br/><br/>
+      </div>
+  </div>
+
+  <div id="blocks" class="form-group">
+    <h2>Blocks:</h2>
+    <button (click)="clickMineBlock()" class="btn btn-success">Mine block</button>
+  </div>
+
+  <div id="overzicht">
+
+    <h2>Blockchain:</h2>
+    <button (click)="clickValidate()" class="btn btn-success">Validate chain</button>
+    <ul>
+      <li *ngFor="let block of blockChain$ | async">
+        <span><strong>{{ block.index }} op datum: {{ block.timestamp }}</strong></span>
+        <details>
+          <summary>Transacties:</summary>
+          <span *ngFor="let transactie of block.transactions">
+              {{ transactie.zender }} -> {{ transactie.ontvanger }} ({{ transactie.amount }})<br/>
+          </span>
+        </details>
+        <br/>
+      </li>
+    </ul>
+  </div>
+</main>

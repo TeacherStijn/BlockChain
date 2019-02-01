@@ -1,0 +1,19 @@
+main {
+  padding: 2em;
+}
+
+h1 {
+  color: green;
+}
+
+.form-group {
+  width: 33%;
+  float: left;
+  /* border: dotted 1px gray;*/
+  padding: 1em;
+}
+
+#overzicht {
+  clear: left;
+  padding: 1em;
+}
