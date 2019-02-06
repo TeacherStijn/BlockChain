@@ -376,4 +376,4 @@ server.listen(LOCAL_PORT, function() {
 	}, function(err){
 		console.log('Ophalen nodes uit DB niet gelukt');
 	});
-}
+});
