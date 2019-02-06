@@ -11,7 +11,7 @@ import {Transactie} from '../models/transactie';
 @Injectable()
 
 export class BlockService {
-  port = '8888';
+  port = '8001';
 
   constructor(private http: HttpClient) {}
 

@@ -1,4 +1,4 @@
-import * as SHA256 from 'crypto-js/sha256';
+// import * as SHA256 from 'crypto-js/sha256';
 
 export class Block {
 
