@@ -331,47 +331,49 @@ server.listen(LOCAL_PORT, function() {
 			}, function(err){
 				console.log('DB chain in lokale chain opslaan niet gelukt');
 			});
-
-			TransactieModel.find({}).then(function(transacties){	
-					selectedChain.currentTransactions = transacties;
-					console.log('Transacties: ' + JSON.stringify(selectedChain.currentTransactions));
-			}, function(err){
-				console.log('DB Transacties in lokale transacties opslaan niet gelukt');
-			});
-		
-			NodeModel.find({}).then(function(nodes){
-				console.log('Eerste keer nodes ophalen...');
-				
-				NodeModel.count({}).then(function(aantalNodes){
-					console.log('Aantal gevonden nodes: ' + aantalNodes);
-					if (aantalNodes==0){
-						let node = {
-							node: HOST
-						};
-						
-						NodeModel.create(node).then(function(nodeResult){							
-							console.log('Eigen node gemaakt en opgeslagen');
-						});
-					}
-		
-					selectedChain.nodes = nodes;
-					console.log('DB nodes opgeslagen in lokale nodelijst');
-					
-					if (selectedChain.nodes.length!=undefined || selectedChain.nodes.length > 0)
-					{
-						console.log('Opgeslagen nodes:');
-						for (let i=0; i<selectedChain.nodes.length; i++){
-							console.log(selectedChain.nodes[i].node);			
-						}
-					}
-				}, function(err){
-					console.log('Tellen aantal nodes uit DB niet gelukt');
-				});
-			}, function(err){
-				console.log('Ophalen nodes uit DB niet gelukt');
-			});
 		}
 	}, function(err){
 		console.log('Tellen aantal blocks mislukt: ' + err);
+	});	
+	
+		
+	TransactieModel.find({}).then(function(transacties){	
+		selectedChain.currentTransactions = transacties;
+		console.log('Transacties: ' + JSON.stringify(selectedChain.currentTransactions));
+	}, function(err){
+		console.log('DB Transacties in lokale transacties opslaan niet gelukt: ' + err);
 	});
-});
+	
+		
+	NodeModel.find({}).then(function(nodes){
+		console.log('Eerste keer nodes ophalen...');
+		
+		NodeModel.count({}).then(function(aantalNodes){
+			console.log('Aantal gevonden nodes: ' + aantalNodes);
+			if (aantalNodes==0){
+				let node = {
+					node: HOST
+				};
+				
+				NodeModel.create(node).then(function(nodeResult){							
+					console.log('Eigen node gemaakt en opgeslagen');
+				});
+			}
+
+			selectedChain.nodes = nodes;
+			console.log('DB nodes opgeslagen in lokale nodelijst');
+			
+			if (selectedChain.nodes.length!=undefined || selectedChain.nodes.length > 0)
+			{
+				console.log('Opgeslagen nodes:');
+				for (let i=0; i<selectedChain.nodes.length; i++){
+					console.log(selectedChain.nodes[i].node);			
+				}
+			}
+		}, function(err){
+			console.log('Tellen aantal nodes uit DB niet gelukt: ' + err);
+		});
+	}, function(err){
+		console.log('Ophalen nodes uit DB niet gelukt');
+	});
+}
