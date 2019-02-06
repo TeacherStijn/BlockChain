@@ -41,10 +41,23 @@ var corsOpties = {
 */
 
 /* Lokale stuff instellen */
-const LOCAL_IP = "http://localhost"; //require("ip").address();
+
+/* Old fashioned:
+const LOCAL_IP = require("ip").address();
+console.log("Local IP.. old way: " + LOCAL_IP);
+const LOCAL_PORT = "8001";
+const HOST = LOCAL_IP + ':' + LOCAL_PORT + '/';
+*/
+
+const os = require( 'os' );
+
+var networkInterfaces = os.networkInterfaces( );
+const LOCAL_IP = networkInterfaces.enp0s8[0].address;
 const LOCAL_PORT = "8001";
 const HOST = LOCAL_IP + ':' + LOCAL_PORT + '/';
 
+console.log( "Running on: " + LOCAL_IP );
+console.log( "Via port: " + LOCAL_PORT );
 
 /* Classes Block en BlockChain importeren */
 var Block = require("./block.js");
